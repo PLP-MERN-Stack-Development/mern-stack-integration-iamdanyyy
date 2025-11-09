@@ -270,7 +270,18 @@ To create categories for your blog posts, you can use the API or create them thr
 
 ## 📸 Screenshots
 
-*(Note: Add screenshots of your application here)*
+<img width="1903" height="1001" alt="Screenshot 2025-11-09 214834" src="https://github.com/user-attachments/assets/369f2e14-5b85-4e1a-a211-b269fda1368b" />
+
+<img width="1901" height="1019" alt="Screenshot 2025-11-09 214901" src="https://github.com/user-attachments/assets/59568872-3045-4c0e-9587-45c76f373aba" />
+
+
+<img width="1904" height="1014" alt="Screenshot 2025-11-09 214918" src="https://github.com/user-attachments/assets/ec5b73b1-4fe4-4f74-b56f-ab6a2a85b02f" />
+
+<img width="1903" height="1016" alt="Screenshot 2025-11-09 214947" src="https://github.com/user-attachments/assets/e3840688-9dd9-4c4b-8a3f-a6502d7018eb" />
+
+
+
+
 
 - Home page with post list
 - Post detail page with comments
@@ -311,21 +322,3 @@ Through building this application, I learned:
 - Password reset functionality
 - Social media sharing
 - Post likes/favorites
-
-## 📄 License
-
-This project is created for educational purposes as part of the Week 4 MERN Stack Integration Assignment.
-
-## 👤 Author
-
-Created as part of the Power Learn Project MERN Stack course.
-
-## 🙏 Acknowledgments
-
-- Power Learn Project for the assignment structure
-- All the open-source libraries and frameworks used
-- MongoDB, Express, React, and Node.js communities
-
----
-
-**Note**: This is a learning project. For production use, additional security measures, error handling, and optimizations would be recommended.
