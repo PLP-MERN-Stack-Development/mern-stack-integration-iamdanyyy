@@ -11,6 +11,7 @@ const path = require('path');
 const postRoutes = require('./routes/posts');
 const categoryRoutes = require('./routes/categories');
 const authRoutes = require('./routes/auth');
+const { errorHandler } = require('./middleware/errorHandler');
 
 // Load environment variables
 dotenv.config();
@@ -45,14 +46,8 @@ app.get('/', (req, res) => {
   res.send('MERN Blog API is running');
 });
 
-// Error handling middleware
-app.use((err, req, res, next) => {
-  console.error(err.stack);
-  res.status(err.statusCode || 500).json({
-    success: false,
-    error: err.message || 'Server Error',
-  });
-});
+// Error handling middleware (must be after routes)
+app.use(errorHandler);
 
 // Connect to MongoDB and start server
 mongoose

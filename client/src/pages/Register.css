@@ -1,0 +1,9 @@
+/* Register.css - Styles for register page (same as login) */
+
+.register-page {
+  padding: 60px 0;
+  min-height: calc(100vh - 200px);
+  display: flex;
+  align-items: center;
+}
+

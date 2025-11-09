@@ -20,8 +20,8 @@ const PostSchema = new mongoose.Schema(
     },
     slug: {
       type: String,
-      required: true,
       unique: true,
+      sparse: true, // Allows multiple documents without slug, but enforces uniqueness when present
     },
     excerpt: {
       type: String,
@@ -40,7 +40,7 @@ const PostSchema = new mongoose.Schema(
     tags: [String],
     isPublished: {
       type: Boolean,
-      default: false,
+      default: true, // Default to published for easier testing
     },
     viewCount: {
       type: Number,
@@ -66,17 +66,25 @@ const PostSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-// Create slug from title before saving
+// Create slug from title before saving (fallback if not set by controller)
 PostSchema.pre('save', function (next) {
-  if (!this.isModified('title')) {
-    return next();
+  // Only generate slug if it's not already set (controller should set it)
+  if (this.title && !this.slug) {
+    let baseSlug = this.title
+      .toLowerCase()
+      .replace(/[^\w ]+/g, '')
+      .replace(/ +/g, '-')
+      .trim()
+      .replace(/^-+|-+$/g, '');
+    
+    // If slug is empty after processing, use a default
+    if (!baseSlug) {
+      baseSlug = 'post-' + Date.now();
+    }
+    
+    this.slug = baseSlug;
   }
   
-  this.slug = this.title
-    .toLowerCase()
-    .replace(/[^\w ]+/g, '')
-    .replace(/ +/g, '-');
-    
   next();
 });
 

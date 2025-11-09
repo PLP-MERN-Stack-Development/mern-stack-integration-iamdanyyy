@@ -41,10 +41,13 @@ api.interceptors.response.use(
 // Post API services
 export const postService = {
   // Get all posts with optional pagination and filters
-  getAllPosts: async (page = 1, limit = 10, category = null) => {
+  getAllPosts: async (page = 1, limit = 10, category = null, search = null) => {
     let url = `/posts?page=${page}&limit=${limit}`;
     if (category) {
       url += `&category=${category}`;
+    }
+    if (search) {
+      url += `&search=${encodeURIComponent(search)}`;
     }
     const response = await api.get(url);
     return response.data;
@@ -80,9 +83,11 @@ export const postService = {
     return response.data;
   },
 
-  // Search posts
-  searchPosts: async (query) => {
-    const response = await api.get(`/posts/search?q=${query}`);
+  // Search posts (using the search query parameter)
+  searchPosts: async (query, page = 1, limit = 10) => {
+    const response = await api.get(
+      `/posts?search=${encodeURIComponent(query)}&page=${page}&limit=${limit}`
+    );
     return response.data;
   },
 };
@@ -107,6 +112,10 @@ export const authService = {
   // Register a new user
   register: async (userData) => {
     const response = await api.post('/auth/register', userData);
+    if (response.data.token) {
+      localStorage.setItem('token', response.data.token);
+      localStorage.setItem('user', JSON.stringify(response.data.user));
+    }
     return response.data;
   },
 
